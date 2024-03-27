@@ -1,12 +1,21 @@
 <div>
     <h1>Lista de tareas</h1>
-    <input type="text" placeholder="Añade una nueva tarea" [(ngModel)]="newTask" (keyup.enter)="addTask()">
+    <!-- Formulario para agregar nueva tarea -->
+    <!-- <form (submit)="addTask()">
+      <input type="text" placeholder="Añade una nueva tarea" [(ngModel)]="newTask">
+      <button type="submit">Añadir</button>
+    </form> -->
+    <input type="text" placeholder="Añade una nueva tarea" [(ngModel)]="newTask">
+    <button (click)="addTask()">Añadir</button>
+    <!-- Lista de tareas -->
     <ul>
       <li *ngFor="let item of taskItems">
-        <input type="checkbox" [checked]="item.completed" (change)="completeTask(item)">
+        <input type="checkbox" [(ngModel)]="item.completed" (change)="markAsCompleted(item)">
         <span [class.completed]="item.completed">{{ item.task }}</span>
-        <button (click)="removeTask(item)">Eliminar</button>
       </li>
     </ul>
+
+    <!-- Botón para eliminar tareas completadas -->
+    <button (click)="removeCompletedTasks()">Eliminar</button>
 </div>
   
