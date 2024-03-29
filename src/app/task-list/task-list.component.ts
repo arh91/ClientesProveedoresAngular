@@ -43,18 +43,20 @@ export class TaskListComponent {
 
   saveTaskToServer(task: TaskItem): void {
     this.http.post('http://localhost:3000/api/tasks', task).subscribe(() => {
-      console.log('Tarea guardada en el servidor');
+      console.log('Se ha guardado la tarea');
     });
   }
 
-  removeCompletedTasks(): void {
-    const completedTasks = this.taskItems.filter(task => task.completed); // Filtra las tareas completadas
-    if (completedTasks.length > 0) {
-      // Realiza una solicitud DELETE para eliminar las tareas completadas en el servidor
-      this.http.delete('http://localhost:3000/api/tasks/completed').subscribe(() => {
-        this.taskItems = this.taskItems.filter(task => !task.completed); // Elimina las tareas completadas de la lista local
-        console.log('Tareas completadas eliminadas del servidor');
+  removeSelectedTasks(): void {
+    const selectedTasks = this.taskItems.filter(task => task.completed); // Filtra las tareas completadas
+    if (selectedTasks.length > 0) {
+      // Realiza una solicitud DELETE para eliminar las tareas marcadas en el servidor
+      selectedTasks.forEach(task => {
+        this.http.delete(`http://localhost:3000/api/tasks/${task.id}`).subscribe(() => {
+          console.log('Se ha eliminado la tarea');
+        });
       });
+      this.taskItems = this.taskItems.filter(task => !task.completed); // Elimina las tareas marcadas de la lista local
     }
   }
 
@@ -65,7 +67,7 @@ export class TaskListComponent {
 
   updateTaskOnServer(task: TaskItem): void {
     this.http.put(`http://localhost:3000/api/tasks/${task.id}`, task).subscribe(() => {
-      console.log('Tarea actualizada en el servidor');
+      console.log('Tarea actualizada');
     });
   }
 }

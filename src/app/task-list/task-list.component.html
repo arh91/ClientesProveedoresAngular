@@ -1,10 +1,5 @@
 <div>
     <h1>Lista de tareas</h1>
-    <!-- Formulario para agregar nueva tarea -->
-    <!-- <form (submit)="addTask()">
-      <input type="text" placeholder="Añade una nueva tarea" [(ngModel)]="newTask">
-      <button type="submit">Añadir</button>
-    </form> -->
     <input type="text" placeholder="Añade una nueva tarea" [(ngModel)]="newTask">
     <button (click)="addTask()">Añadir</button>
     <!-- Lista de tareas -->
@@ -16,6 +11,6 @@
     </ul>
 
     <!-- Botón para eliminar tareas completadas -->
-    <button (click)="removeCompletedTasks()">Eliminar</button>
+    <button (click)="removeSelectedTasks()">Eliminar</button>
 </div>
   
