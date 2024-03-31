@@ -1,35 +1,35 @@
 <!-- customer-register.component.html -->
 
 <div>
-    <h1>Nuevo Cliente</h1>
+    <h1>NUEVO CLIENTE</h1>
   
     <!-- Formulario de registro -->
     <form (ngSubmit)="registerCustomer()">
       <div>
         <label for="customerId">DNI:</label>
-        <input type="text" id="dni" name="dni" [(ngModel)]="customer.id" required>
+        <input type="text" id="customerId" name="customerId" [(ngModel)]="customer.id" required>
       </div>
       <br>
       <div>
         <label for="customerName">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" [(ngModel)]="customer.name" required>
+        <input type="text" id="customerName" name="customerName" [(ngModel)]="customer.name" required>
       </div>
       <br>
       <div>
         <label for="customerAddress">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" [(ngModel)]="customer.address" required>
+        <input type="text" id="customerAddress" name="customerAddress" [(ngModel)]="customer.address" required>
       </div>
       <br>
       <div>
         <label for="customerPhone">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" [(ngModel)]="customer.phone" required>
+        <input type="text" id="customerPhone" name="customerPhone" [(ngModel)]="customer.phone" required>
       </div>
       <br>
       <button type="submit">Registrar</button>
     </form>
-    <br><br>
+    <br>
     <div>
-      <button routerLink="/customers-list">Listado</button>
+      <button routerLink="/customer-options">Atrás</button>
     </div>
 </div>
   

@@ -1,34 +1,34 @@
 <!-- supplier-register.component.html -->
 
 <div>
-    <h1>Nuevo Proveedor</h1>
+    <h1>NUEVO PROVEEDOR</h1>
   
     <!-- Formulario de registro -->
     <form (ngSubmit)="registerSupplier()">
       <div>
-        <label for="supplieId">DNI:</label>
-        <input type="text" id="dni" name="dni" [(ngModel)]="supplier.id" required>
+        <label for="supplierId">DNI:</label>
+        <input type="text" id="supplierId" name="supplierId" [(ngModel)]="supplier.id" required>
       </div>
       <br>
       <div>
         <label for="supplierName">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" [(ngModel)]="supplier.name" required>
+        <input type="text" id="supplierName" name="supplierName" [(ngModel)]="supplier.name" required>
       </div>
       <br>
       <div>
         <label for="supplierAddress">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" [(ngModel)]="supplier.address" required>
+        <input type="text" id="supplierAddress" name="supplierAddress" [(ngModel)]="supplier.address" required>
       </div>
       <br>
       <div>
         <label for="supplierPhone">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" [(ngModel)]="supplier.phone" required>
+        <input type="text" id="supplierPhone" name="supplierPhone" [(ngModel)]="supplier.phone" required>
       </div>
       <br>
       <button type="submit">Registrar</button>
     </form>
-    <br><br>
+    <br>
     <div>
-      <button routerLink="/suppliers-list">Listado</button>
+      <button routerLink="/supplier-options">Atrás</button>
     </div>
   </div>
