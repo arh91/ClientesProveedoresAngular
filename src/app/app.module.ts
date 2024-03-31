@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -17,13 +16,15 @@ import { SuppliersListComponent } from './suppliers-list/suppliers-list.componen
 @NgModule({
   declarations: [
     AppComponent,
-    AppStartComponent,
     TaskListComponent,
+    AppStartComponent,
     CustomerRegisterComponent,
+    AppStartComponent,
     CustomerOptionsComponent,
     CustomersListComponent,
     SupplierRegisterComponent,
-    SuppliersOptionsComponent
+    SupplierOptionsComponent, 
+    SuppliersListComponent
   ], 
   imports: [
     BrowserModule,
