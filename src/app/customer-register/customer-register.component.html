@@ -1,0 +1,28 @@
+<!-- customer-register.component.html -->
+
+<div>
+    <h1>Registro de Cliente</h1>
+  
+    <!-- Formulario de registro -->
+    <form (ngSubmit)="registerCustomer()">
+      <div>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" [(ngModel)]="customer.dni" required>
+      </div>
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="customer.nombre" required>
+      </div>
+      <div>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" [(ngModel)]="customer.direccion" required>
+      </div>
+      <div>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" [(ngModel)]="customer.telefono" required>
+      </div>
+  
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+  
