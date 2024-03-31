@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Customer {
-  dni: string;
-  nombre: string;
-  direccion: string;
-  telefono: string;
+  id: string;
+  name: string;
+  address: string;
+  phone: string;
 }
 
 @Component({
@@ -14,7 +14,7 @@ interface Customer {
   styleUrl: './customer-register.component.css'
 })
 export class CustomerRegisterComponent {
-  customer: Customer = { dni: '', nombre: '', direccion: '', telefono: '' };
+  customer: Customer = { id: '', name: '', address: '', phone: '' };
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class CustomerRegisterComponent {
     this.http.post('http://localhost:3000/api/customers', this.customer).subscribe(() => {
       console.log('Cliente registrado en el servidor');
       // Limpiar el formulario después del registro exitoso
-      this.customer = { dni: '', nombre: '', direccion: '', telefono: '' };
+      this.customer = { id: '', name: '', address: '', phone: '' };
     }, error => {
       console.error('Error al registrar el cliente:', error);
     });

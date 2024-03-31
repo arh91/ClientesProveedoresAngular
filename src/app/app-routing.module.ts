@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './task-list/task-list.component';
-import { CustomerRegisterComponent } from './customer-register/customer-register.component'
+import { AppStartComponent } from './app-start/app-start.component';
+import { CustomerOptionsComponent } from './customer-options/customer-options.component';
+import { CustomerRegisterComponent } from './customer-register/customer-register.component';
+import { CustomersListComponent } from './customers-list/customers-list.component';
+import { SupplierOptionsComponent } from './supplier-options/supplier-options.component';
+import { SupplierRegisterComponent } from './supplier-register/supplier-register.component';
+import { SuppliersListComponent } from './suppliers-list/suppliers-list.component';
 
 /* const routes: Routes = [
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
@@ -10,8 +16,13 @@ import { CustomerRegisterComponent } from './customer-register/customer-register
 ]; */
 
 const routes: Routes = [
-  { path: '', component: TaskListComponent },
-  { path: 'customer-register', component: CustomerRegisterComponent }
+  { path: '', component: AppStartComponent },
+  { path: 'customer-options', component: CustomerOptionsComponent },
+  { path: 'customer-register', component: CustomerRegisterComponent },
+  { path: 'customers-list', component: CustomersListComponent },
+  { path: 'supplier-options', component: SupplierOptionsComponent },
+  { path: 'supplier-register', component: SupplierRegisterComponent },
+  { path: 'suppliers-list', component: SuppliersListComponent },
 ];
 
 @NgModule({
