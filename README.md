@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TaskListApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
@@ -25,3 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# AngularSQLite2.0
+
+Continuación del proyecto AngularSQLite, al cuál vamos a ir añadiendo nuevos componentes y funciones.
+>>>>>>> 5713b33c055ac5d202c9487d816ed5d942ad5318
