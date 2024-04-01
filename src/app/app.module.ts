@@ -11,6 +11,8 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { SupplierRegisterComponent } from './supplier-register/supplier-register.component';
 import { SupplierOptionsComponent } from './supplier-options/supplier-options.component';
 import { SuppliersListComponent } from './suppliers-list/suppliers-list.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SuppliersListComponent } from './suppliers-list/suppliers-list.componen
     CustomersListComponent,
     SupplierRegisterComponent,
     SupplierOptionsComponent, 
-    SuppliersListComponent
+    SuppliersListComponent,
+    CustomerDetailsComponent, 
+    SupplierDetailsComponent
   ], 
   imports: [
     BrowserModule,
