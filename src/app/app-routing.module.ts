@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskListComponent } from './task-list/task-list.component';
 import { AppStartComponent } from './app-start/app-start.component';
 import { CustomerOptionsComponent } from './customer-options/customer-options.component';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';

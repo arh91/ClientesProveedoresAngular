@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TaskListComponent } from './task-list/task-list.component'; // Importa el componente
-
+//import { TaskListComponent } from './task-list/task-list.component'; // Importa el componente
+//import { AppStartComponent } from './app-start/app-start.component';
 
 @Component({
   selector: 'app-root',

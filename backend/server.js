@@ -18,60 +18,158 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // Conectar a la base de datos SQLite (si no existe, se creará automáticamente)
-const db = new sqlite3.Database('lista_de_tareas.db');
+const db = new sqlite3.Database('empresa.db');
 
-db.serialize(() => {
-  db.run('CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, task TEXT, completed INTEGER)');
-});
+// Crear la tabla "Clientes" si no existe
+db.run(`CREATE TABLE IF NOT EXISTS Clientes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  dni TEXT,
+  nombre TEXT,
+  direccion TEXT,
+  telefono TEXT
+)`);
 
-//Endpoint para obtener la lista de tareas
-app.get('/api/tasks', (_req, res) => {
-  db.all('SELECT * FROM tasks', (err, rows) => {
+// Crear la tabla "Proveedores" si no existe
+db.run(`CREATE TABLE IF NOT EXISTS Proveedores (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  dni TEXT,
+  nombre TEXT,
+  direccion TEXT,
+  telefono TEXT
+)`);
+
+// Endpoint para agregar un cliente
+app.post('/api/clientes', (req, res) => {
+  const { dni, nombre, direccion, telefono } = req.body;
+  db.run('INSERT INTO Clientes (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, nombre, direccion, telefono], (err) => {
     if (err) {
-      console.error('Error al obtener las tareas de la base de datos:', err);
-      return res.status(500).json({ error: 'Error al obtener las tareas' });
+      console.error('Error al agregar cliente:', err);
+      return res.status(500).json({ error: 'Error al agregar cliente' });
     }
-    res.json(rows);
+    res.status(201).json({ message: 'Cliente agregado correctamente' });
   });
 });
 
-//Endpoint para agregar una nueva tarea
-app.post('/api/tasks', (req, res) => {
-  const { task, completed } = req.body;
-  const taskId = uuidv4(); // Generar un ID único utilizando uuid
-  db.run('INSERT INTO tasks (id, task, completed) VALUES (?, ?, ?)', [taskId, task, completed], function (err) {
+// Endpoint para agregar un proveedor
+app.post('/api/proveedores', (req, res) => {
+  const { dni, nombre, direccion, telefono } = req.body;
+  db.run('INSERT INTO Proveedores (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, nombre, direccion, telefono], (err) => {
     if (err) {
-      console.error('Error al agregar la tarea a la base de datos:', err);
-      return res.status(500).json({ error: 'Error al agregar la tarea' });
+      console.error('Error al agregar proveedor:', err);
+      return res.status(500).json({ error: 'Error al agregar proveedor' });
     }
-    res.status(201).json({ id: taskId, task, completed });
+    res.status(201).json({ message: 'Proveedor agregado correctamente' });
   });
 });
 
-// Endpoint para actualizar una tarea por su ID
-app.put('/api/tasks/:id', (req, res) => {
-  const taskId = req.params.id;
-  const { task, completed } = req.body;
-  db.run('UPDATE tasks SET task = ?, completed = ? WHERE id = ?', [task, completed, taskId], (err) => {
+// Endpoint para obtener los códigos de todos los clientes
+app.get('/api/clientes/codigos', (_req, res) => {
+  db.all('SELECT id FROM Clientes', (err, rows) => {
     if (err) {
-      console.error('Error al actualizar la tarea en la base de datos:', err);
-      return res.status(500).json({ error: 'Error al actualizar la tarea' });
+      console.error('Error al obtener códigos de clientes:', err);
+      return res.status(500).json({ error: 'Error al obtener códigos de clientes' });
     }
-    res.status(200).json({ id: taskId, task, completed });
+    const codigos = rows.map(row => row.id);
+    res.json({ codigos });
   });
 });
 
-// Endpoint para eliminar una tarea por su ID
-app.delete('/api/tasks/:id', (req, res) => {
-  const taskId = req.params.id;
-  db.run('DELETE FROM tasks WHERE id = ?', [taskId], (err) => {
+// Endpoint para obtener los códigos de todos los proveedores
+app.get('/api/proveedores/codigos', (_req, res) => {
+  db.all('SELECT id FROM Proveedores', (err, rows) => {
     if (err) {
-      console.error('Error al eliminar la tarea de la base de datos:', err);
-      return res.status(500).json({ error: 'Error al eliminar la tarea' });
+      console.error('Error al obtener códigos de proveedores:', err);
+      return res.status(500).json({ error: 'Error al obtener códigos de proveedores' });
     }
-    res.status(200).json({ message: 'Tarea eliminada correctamente' });
+    const codigos = rows.map(row => row.id);
+    res.json({ codigos });
   });
 });
+
+// Endpoint para obtener los datos de un cliente por su ID
+app.get('/api/clientes/:id', (req, res) => {
+  const clienteId = req.params.id;
+  db.get('SELECT * FROM Clientes WHERE id = ?', [clienteId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener datos del cliente:', err);
+      return res.status(500).json({ error: 'Error al obtener datos del cliente' });
+    }
+    if (!row) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+    res.json(row);
+  });
+});
+
+// Endpoint para obtener los datos de un proveedor por su ID
+app.get('/api/proveedores/:id', (req, res) => {
+  const proveedorId = req.params.id;
+  db.get('SELECT * FROM Proveedores WHERE id = ?', [proveedorId], (err, row) => {
+    if (err) {
+      console.error('Error al obtener datos del proveedor:', err);
+      return res.status(500).json({ error: 'Error al obtener datos del proveedor' });
+    }
+    if (!row) {
+      return res.status(404).json({ message: 'Proveedor no encontrado' });
+    }
+    res.json(row);
+  });
+});
+
+app.delete('/api/clientes/:id', (req, res) => {
+  const clienteId = req.params.id;
+  db.run('DELETE FROM Clientes WHERE id = ?', [clienteId], (err) => {
+    if (err) {
+      console.error('Error al eliminar el cliente de la base de datos:', err);
+      return res.status(500).json({ error: 'Error al eliminar el cliente' });
+    }
+    res.status(200).json({ message: 'Cliente eliminado correctamente' });
+  });
+});
+
+app.delete('/api/proveedores/:id', (req, res) => {
+  const proveedorId = req.params.id;
+  db.run('DELETE FROM Proveedores WHERE id = ?', [proveedorId], (err) => {
+    if (err) {
+      console.error('Error al eliminar el proveedor de la base de datos:', err);
+      return res.status(500).json({ error: 'Error al eliminar el proveedor' });
+    }
+    res.status(200).json({ message: 'Proveedor eliminado correctamente' });
+  });
+});
+
+app.put('/api/clientes/:id', (req, res) => {
+  const clienteId = req.params.id;
+  const { dni, nombre, direccion, telefono } = req.body;
+  db.run(
+    'UPDATE Clientes SET dni = ?, nombre = ?, direccion = ?, telefono = ? WHERE id = ?',
+    [dni, nombre, direccion, telefono, clienteId],
+    (err) => {
+      if (err) {
+        console.error('Error al actualizar el cliente en la base de datos:', err);
+        return res.status(500).json({ error: 'Error al actualizar el cliente' });
+      }
+      res.status(200).json({ message: 'Cliente actualizado correctamente' });
+    }
+  );
+});
+
+app.put('/api/proveedores/:id', (req, res) => {
+  const proveedorId = req.params.id;
+  const { dni, nombre, direccion, telefono } = req.body;
+  db.run(
+    'UPDATE Proveedores SET dni = ?, nombre = ?, direccion = ?, telefono = ? WHERE id = ?',
+    [dni, nombre, direccion, telefono, proveedorId],
+    (err) => {
+      if (err) {
+        console.error('Error al actualizar el proveedor en la base de datos:', err);
+        return res.status(500).json({ error: 'Error al actualizar el proveedor' });
+      }
+      res.status(200).json({ message: 'Proveedor actualizado correctamente' });
+    }
+  );
+});
+
 
 app.listen(port, () => {
   console.log(`Servidor activo en el puerto ${port}`);
