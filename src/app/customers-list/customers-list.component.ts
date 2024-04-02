@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Customer {
-  id: number; // Agrega el campo 'id' para identificar cada tarea de manera única
+  id: number; 
   code: string
   name: string;
   address: string;
-  phone: number;
+  phone: string;
 }
 
 @Component({
@@ -15,7 +15,7 @@ interface Customer {
   styleUrl: './customers-list.component.css'
 })
 export class CustomersListComponent implements OnInit {
-  customerCodes: Customer[] = [];
+  customerIds: Customer[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +23,17 @@ export class CustomersListComponent implements OnInit {
     this.getCustomerCodes();
   }
 
+
   getCustomerCodes(): void {
-    this.http.get<Customer[]>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
-      this.customerCodes = data;
+    this.http.get<any>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
+      if (data && data.codigos && Array.isArray(data.codigos)) {
+        this.customerIds = data.codigos;
+      } else {
+        console.error('Respuesta inválida del servidor:', data);
+      }
+    }, error => {
+      console.error('Error al obtener códigos de clientes:', error);
     });
   }
 }
+

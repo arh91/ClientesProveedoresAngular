@@ -1,1 +1,10 @@
-<p>suppliers-list works!</p>
+<h1>Lista de Proveedores</h1>
+<ul>
+  <li *ngFor="let id of supplierIds">
+    <a [routerLink]="['/supplier-details', id]">{{ id }}</a>
+  </li>
+</ul>
+<br>
+    <div>
+      <button routerLink="/supplier-options">Atrás</button>
+    </div>

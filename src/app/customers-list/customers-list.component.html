@@ -1,7 +1,7 @@
 <h1>Lista de Clientes</h1>
 <ul>
-  <li *ngFor="let code of customerCodes">
-    <a [routerLink]="['/customer-details', code]">{{ code }}</a>
+  <li *ngFor="let id of customerIds">
+    <a [routerLink]="['/customer-details', id]">{{ id }}</a>
   </li>
 </ul>
 <br>
