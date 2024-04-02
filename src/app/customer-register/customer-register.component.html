@@ -6,26 +6,26 @@
     <!-- Formulario de registro -->
     <form (ngSubmit)="registerCustomer()">
       <div>
-        <label for="customerId">DNI:</label>
-        <input type="text" id="customerId" name="customerId" [(ngModel)]="customer.id" required>
+        <label for="customerNif" id="labelCustomerNif">DNI:</label>
+        <input type="text" id="customerNif" name="customerNif" [(ngModel)]="customer.nif" required>
       </div>
       <br>
       <div>
-        <label for="customerName">Nombre:</label>
+        <label for="customerName" id="labelCustomerName">Nombre:</label>
         <input type="text" id="customerName" name="customerName" [(ngModel)]="customer.name" required>
       </div>
       <br>
       <div>
-        <label for="customerAddress">Dirección:</label>
+        <label for="customerAddress" id="labelCustomerAddress">Dirección:</label>
         <input type="text" id="customerAddress" name="customerAddress" [(ngModel)]="customer.address" required>
       </div>
       <br>
       <div>
-        <label for="customerPhone">Teléfono:</label>
+        <label for="customerPhone" id="labelCustomerPhone">Teléfono:</label>
         <input type="text" id="customerPhone" name="customerPhone" [(ngModel)]="customer.phone" required>
       </div>
       <br>
-      <button type="submit">Registrar</button>
+      <button id="btnSubmitCustomer" type="submit">Registrar</button>
     </form>
     <br>
     <div>

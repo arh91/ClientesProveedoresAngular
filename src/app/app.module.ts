@@ -13,6 +13,7 @@ import { SupplierOptionsComponent } from './supplier-options/supplier-options.co
 import { SuppliersListComponent } from './suppliers-list/suppliers-list.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { SupplierDetailsComponent } from './supplier-details/supplier-details.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { SupplierDetailsComponent } from './supplier-details/supplier-details.co
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync('noop')
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

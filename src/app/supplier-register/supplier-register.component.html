@@ -6,26 +6,26 @@
     <!-- Formulario de registro -->
     <form (ngSubmit)="registerSupplier()">
       <div>
-        <label for="supplierId">DNI:</label>
+        <label for="supplierId" id="labelSupplierId">DNI:</label>
         <input type="text" id="supplierId" name="supplierId" [(ngModel)]="supplier.id" required>
       </div>
       <br>
       <div>
-        <label for="supplierName">Nombre:</label>
+        <label for="supplierName" id="labelSupplierName">Nombre:</label>
         <input type="text" id="supplierName" name="supplierName" [(ngModel)]="supplier.name" required>
       </div>
       <br>
       <div>
-        <label for="supplierAddress">Dirección:</label>
+        <label for="supplierAddress" id="labelSupplierAddress">Dirección:</label>
         <input type="text" id="supplierAddress" name="supplierAddress" [(ngModel)]="supplier.address" required>
       </div>
       <br>
       <div>
-        <label for="supplierPhone">Teléfono:</label>
+        <label for="supplierPhone" id="labelSupplierPhone">Teléfono:</label>
         <input type="text" id="supplierPhone" name="supplierPhone" [(ngModel)]="supplier.phone" required>
       </div>
       <br>
-      <button type="submit">Registrar</button>
+      <button id="btnSubmitSupplier" type="submit">Registrar</button>
     </form>
     <br>
     <div>

@@ -1,1 +1,10 @@
-<p>customers-list works!</p>
+<h1>Lista de Clientes</h1>
+<ul>
+  <li *ngFor="let code of customerCodes">
+    <a [routerLink]="['/customer-details', code]">{{ code }}</a>
+  </li>
+</ul>
+<br>
+    <div>
+      <button routerLink="/customer-options">Atrás</button>
+    </div>
