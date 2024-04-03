@@ -40,8 +40,8 @@ db.run(`CREATE TABLE IF NOT EXISTS Proveedores (
 
 // Endpoint para agregar un cliente
 app.post('/api/clientes', (req, res) => {
-  const { dni, nombre, direccion, telefono } = req.body;
-  db.run('INSERT INTO Clientes (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, nombre, direccion, telefono], (err) => {
+  const { dni, name, address, phone } = req.body;
+  db.run('INSERT INTO Clientes (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, name, address, phone], (err) => {
     if (err) {
       console.error('Error al agregar cliente:', err);
       return res.status(500).json({ error: 'Error al agregar cliente' });
@@ -52,8 +52,8 @@ app.post('/api/clientes', (req, res) => {
 
 // Endpoint para agregar un proveedor
 app.post('/api/proveedores', (req, res) => {
-  const { dni, nombre, direccion, telefono } = req.body;
-  db.run('INSERT INTO Proveedores (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, nombre, direccion, telefono], (err) => {
+  const { dni, name, address, phone } = req.body;
+  db.run('INSERT INTO Proveedores (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, name, address, phone], (err) => {
     if (err) {
       console.error('Error al agregar proveedor:', err);
       return res.status(500).json({ error: 'Error al agregar proveedor' });

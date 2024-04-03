@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'supplier-options', component: SupplierOptionsComponent },
   { path: 'supplier-register', component: SupplierRegisterComponent },
   { path: 'suppliers-list', component: SuppliersListComponent },
-  { path: 'customer-details', component: CustomerDetailsComponent },
+  { path: 'customer-details/:id', component: CustomerDetailsComponent },
   { path: 'supplier-details', component: SupplierDetailsComponent }
 ];
 
