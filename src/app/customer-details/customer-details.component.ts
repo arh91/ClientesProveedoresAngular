@@ -40,6 +40,7 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   deleteCustomer(): void {
+    console.log('Método deleteCustomer');
     if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
       return;
     }

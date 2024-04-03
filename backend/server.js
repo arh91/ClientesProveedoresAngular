@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Conectar a la base de datos SQLite (si no existe, se creará automáticamente)
 const db = new sqlite3.Database('empresa.db');
 
-// Crear la tabla "Clientes" si no existe
+// Creamos la tabla "Clientes" si no existe
 db.run(`CREATE TABLE IF NOT EXISTS Clientes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   dni TEXT,
@@ -29,7 +29,7 @@ db.run(`CREATE TABLE IF NOT EXISTS Clientes (
   telefono TEXT
 )`);
 
-// Crear la tabla "Proveedores" si no existe
+// Creamos la tabla "Proveedores" si no existe
 db.run(`CREATE TABLE IF NOT EXISTS Proveedores (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   dni TEXT,
@@ -38,7 +38,7 @@ db.run(`CREATE TABLE IF NOT EXISTS Proveedores (
   telefono TEXT
 )`);
 
-// Endpoint para agregar un cliente
+// Endpoint para agregar un nuevo cliente
 app.post('/api/clientes', (req, res) => {
   const { dni, name, address, phone } = req.body;
   db.run('INSERT INTO Clientes (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, name, address, phone], (err) => {
@@ -50,7 +50,7 @@ app.post('/api/clientes', (req, res) => {
   });
 });
 
-// Endpoint para agregar un proveedor
+// Endpoint para agregar un nuevo proveedor
 app.post('/api/proveedores', (req, res) => {
   const { dni, name, address, phone } = req.body;
   db.run('INSERT INTO Proveedores (dni, nombre, direccion, telefono) VALUES (?, ?, ?, ?)', [dni, name, address, phone], (err) => {
@@ -86,7 +86,7 @@ app.get('/api/proveedores/codigos', (_req, res) => {
   });
 });
 
-// Endpoint para obtener los datos de un cliente por su ID
+// Endpoint para obtener los datos de un cliente por su id
 app.get('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;
   db.get('SELECT * FROM Clientes WHERE id = ?', [clienteId], (err, row) => {
@@ -101,7 +101,7 @@ app.get('/api/clientes/:id', (req, res) => {
   });
 });
 
-// Endpoint para obtener los datos de un proveedor por su ID
+// Endpoint para obtener los datos de un proveedor por su id
 app.get('/api/proveedores/:id', (req, res) => {
   const proveedorId = req.params.id;
   db.get('SELECT * FROM Proveedores WHERE id = ?', [proveedorId], (err, row) => {
@@ -116,6 +116,7 @@ app.get('/api/proveedores/:id', (req, res) => {
   });
 });
 
+//Endpoint para eliminar un cliente por su id
 app.delete('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;
   db.run('DELETE FROM Clientes WHERE id = ?', [clienteId], (err) => {
@@ -127,6 +128,7 @@ app.delete('/api/clientes/:id', (req, res) => {
   });
 });
 
+//Endpoint para eliminar un proveedor por su id
 app.delete('/api/proveedores/:id', (req, res) => {
   const proveedorId = req.params.id;
   db.run('DELETE FROM Proveedores WHERE id = ?', [proveedorId], (err) => {
@@ -138,6 +140,25 @@ app.delete('/api/proveedores/:id', (req, res) => {
   });
 });
 
+// Endpoint para eliminar todos los registros de la tabla Clientes
+app.delete('/api/clientes', (_req, res) => {
+  db.run('DELETE FROM Clientes', (err) => {
+    if (err) {
+      console.error('Error al eliminar clientes:', err);
+      return res.status(500).json({ error: 'Error al eliminar clientes' });
+    }
+    // Reiniciar el contador de IDs
+    db.run('DELETE FROM sqlite_sequence WHERE name = ?', ['Clientes'], (err2) => {
+      if (err2) {
+        console.error('Error al reiniciar el contador de IDs:', err2);
+        return res.status(500).json({ error: 'Error al reiniciar el contador de IDs' });
+      }
+    res.status(200).json({ message: 'Todos los clientes han sido eliminados' });
+    }); 
+  });
+});
+
+//Endpoint para actualizar datos de un cliente con un id determinado
 app.put('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;
   const { dni, nombre, direccion, telefono } = req.body;
@@ -154,6 +175,7 @@ app.put('/api/clientes/:id', (req, res) => {
   );
 });
 
+//Endpoint para actualizar datos de un proveedor con un id determinado
 app.put('/api/proveedores/:id', (req, res) => {
   const proveedorId = req.params.id;
   const { dni, nombre, direccion, telefono } = req.body;
