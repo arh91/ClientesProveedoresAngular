@@ -40,7 +40,6 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   deleteCustomer(): void {
-    console.log('Método deleteCustomer');
     if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
       return;
     }
@@ -51,6 +50,24 @@ export class CustomerDetailsComponent implements OnInit {
     }, error => {
       console.error('Error al eliminar cliente:', error);
       this.openSnackBar('Error al eliminar cliente', 'Cerrar');
+    });
+  }
+
+  updateCustomer(): void {
+    // Verificamos que no quede ningún campo vacío
+    if (!this.customer?.dni || !this.customer?.nombre || !this.customer?.direccion || !this.customer?.telefono) {
+      this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      return; 
+    }
+    if (!confirm('¿Estás seguro de que deseas modificar este cliente?')) {
+      return;
+    }
+    this.http.put(`http://localhost:3000/api/clientes/${this.customerId}`, this.customer).subscribe(() => {
+      console.log('Cliente actualizado en el servidor');
+      this.openSnackBar('Cliente actualizado', 'Cerrar');
+    }, error => {
+      console.error('Error al actualizar el cliente:', error);
+      this.openSnackBar('Error al actualizar el cliente', 'Cerrar');
     });
   }
 

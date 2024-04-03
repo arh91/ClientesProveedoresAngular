@@ -30,6 +30,9 @@ export class CustomersListComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
       if (data && data.codigos && Array.isArray(data.codigos)) {
         this.customerIds = data.codigos;
+      }
+      if (this.customerIds.length === 0) {
+        this.mensajeListaVacia();
       } else {
         console.error('Respuesta inválida del servidor:', data);
       }
@@ -55,6 +58,14 @@ export class CustomersListComponent implements OnInit {
     }, error => {
       console.error('Error al eliminar clientes:', error);
       this.openSnackBar('Error al eliminar clientes', 'Cerrar');
+    });
+  }
+
+  mensajeListaVacia(): void {
+    this._snackBar.open('No hay clientes registrados.', 'Cerrar', {
+      duration: 3000, // Duración en milisegundos
+      verticalPosition: 'top', // Posición vertical
+      horizontalPosition: 'center', // Posición horizontal
     });
   }
 
