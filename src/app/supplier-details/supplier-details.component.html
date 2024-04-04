@@ -1,1 +1,45 @@
-<p>supplier-details works!</p>
+<!-- supplier-details.component.html -->
+
+<div *ngIf="supplier">
+    <h1>Detalles del Proveedor</h1>
+    <br><br>
+  
+    <div id="one">
+  
+      <div class="supplier-id">
+        <label>ID:</label>
+        <input type="text" [(ngModel)]="supplier.id" disabled>
+      </div>
+  
+      <div class="supplier-nif">
+        <label>DNI:</label>
+        <input type="text" [(ngModel)]="supplier.dni" disabled>
+      </div>
+  
+      <div class="supplier-name">
+        <label>Nombre:</label>
+        <input type="text" [(ngModel)]="supplier.nombre">
+      </div>
+  
+      <div class="supplier-address">
+        <label>Dirección:</label>
+        <input type="text" [(ngModel)]="supplier.direccion">
+      </div>
+  
+      <div class="supplier-phone">
+        <label>Teléfono:</label>
+        <input type="text" [(ngModel)]="supplier.telefono">
+      </div>
+    </div>
+  
+    <br><br>
+  
+    <div id="two">
+      <button (click)="deleteSupplier()">Eliminar</button>
+      <button (click)="updateSupplier()">Modificar</button>
+      <button routerLink='/suppliers-list'>Atrás</button>
+    </div>
+  
+    
+  </div>
+  

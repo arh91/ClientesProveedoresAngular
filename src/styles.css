@@ -21,6 +21,10 @@ h1{
     font-size: 70px;
 }
 
+input[type="text"] {
+    width: 300px; 
+}
+
 .main-container {
     width: 100%; 
     display: flex;

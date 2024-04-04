@@ -1,34 +1,40 @@
 <!-- supplier-register.component.html -->
 
-<div>
+  <div>
     <h1>Nuevo Proveedor</h1>
-  
+    <br><br>
     <!-- Formulario de registro -->
-    <form (ngSubmit)="registerSupplier()">
-      <div>
-        <label for="supplierId" id="labelSupplierId">DNI:</label>
-        <input type="text" id="supplierId" name="supplierId" [(ngModel)]="supplier.dni" required>
+    <form (ngSubmit)="registerSupplier()" class="form-container">
+  
+      <div id="one">
+        <div class="supplier-nif">
+          <label for="supplierNif">DNI:</label>
+          <input type="text" id="supplierNif" name="supplierNif" [(ngModel)]="supplier.dni" required>
+        </div>
+  
+        <div class="supplier-name">
+          <label for="supplierName">Nombre:</label>
+          <input type="text" id="supplierName" name="supplierName" [(ngModel)]="supplier.name" required>
+        </div>
+  
+        <div class="supplier-address">
+          <label for="supplierAddress">Dirección:</label>
+          <input type="text" id="supplierAddress" name="supplierAddress" [(ngModel)]="supplier.address" required>
+        </div>
+  
+        <div class="supplier-phone">
+          <label for="supplierPhone">Teléfono:</label>
+          <input type="text" id="supplierPhone" name="supplierPhone" [(ngModel)]="supplier.phone" required>
+        </div>
       </div>
-      <br>
-      <div>
-        <label for="supplierName" id="labelSupplierName">Nombre:</label>
-        <input type="text" id="supplierName" name="supplierName" [(ngModel)]="supplier.name" required>
+  
+      <br><br>
+  
+      <div id="two">
+        <button id="btnSubmitSupplier" type="submit">Registrar</button>
+        <button routerLink="/supplier-options">Atrás</button>
       </div>
-      <br>
-      <div>
-        <label for="supplierAddress" id="labelSupplierAddress">Dirección:</label>
-        <input type="text" id="supplierAddress" name="supplierAddress" [(ngModel)]="supplier.address" required>
-      </div>
-      <br>
-      <div>
-        <label for="supplierPhone" id="labelSupplierPhone">Teléfono:</label>
-        <input type="text" id="supplierPhone" name="supplierPhone" [(ngModel)]="supplier.phone" required>
-      </div>
-      <br>
-      <button id="btnSubmitSupplier" type="submit">Registrar</button>
+  
     </form>
-    <br>
-    <div>
-      <button routerLink="/supplier-options">Atrás</button>
-    </div>
+    
   </div>

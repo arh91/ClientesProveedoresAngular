@@ -1,0 +1,40 @@
+  #one {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos horizontalmente */
+  }
+
+  .supplier-nif {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom:20px;
+  }
+
+  .supplier-name {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom:20px;
+  }
+
+  .supplier-address {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:20px; 
+  }
+
+  .supplier-phone {
+    display: flex;
+    justify-content: space-between; 
+  }
+
+  #two {
+    display: flex;
+    justify-content: space-between; 
+  }
+
+  label{
+    margin-right: 30px;
+  } 
+  
+  h1{
+    margin-left:130px;
+  }

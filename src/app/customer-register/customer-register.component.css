@@ -1,0 +1,41 @@
+  #one {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos horizontalmente */
+  }
+
+  .customer-nif {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom:20px;
+  }
+
+  .customer-name {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom:20px;
+  }
+
+  .customer-address {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:20px; 
+  }
+
+  .customer-phone {
+    display: flex;
+    justify-content: space-between; 
+  }
+
+  #two {
+    display: flex;
+    justify-content: space-between; 
+  }
+
+  label{
+    margin-right: 30px;
+  } 
+  
+  h1{
+    margin-left:130px;
+  }
+  

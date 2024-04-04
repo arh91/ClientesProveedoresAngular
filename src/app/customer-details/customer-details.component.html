@@ -1,40 +1,44 @@
-  <div *ngIf="customer">
-    <h1>Detalles del Cliente</h1>
-    <br><br>
-    <div>
+<!-- customer-details.component.html -->
+
+<div *ngIf="customer">
+  <h1>Detalles del Cliente</h1>
+  <br><br>
+
+  <div id="one">
+
+    <div class="customer-id">
       <label>ID:</label>
       <input type="text" [(ngModel)]="customer.id" disabled>
     </div>
-    <br>
-    <div>
+
+    <div class="customer-nif">
       <label>DNI:</label>
       <input type="text" [(ngModel)]="customer.dni" disabled>
     </div>
-    <br>
-    <div>
+
+    <div class="customer-name">
       <label>Nombre:</label>
       <input type="text" [(ngModel)]="customer.nombre">
     </div>
-    <br>
-    <div>
+
+    <div class="customer-address">
       <label>Dirección:</label>
       <input type="text" [(ngModel)]="customer.direccion">
     </div>
-    <br>
-    <div>
+
+    <div class="customer-phone">
       <label>Teléfono:</label>
       <input type="text" [(ngModel)]="customer.telefono">
     </div>
-    <br><br><br>
-    <div>
-      <button (click)="deleteCustomer()">Eliminar</button>
-    </div>
-    <br>
-    <div>
-        <button (click)="updateCustomer()">Modificar</button>
-    </div>
-    <br>
-    <div>
-        <button routerLink='/customers-list'>Atrás</button>
-    </div>
   </div>
+
+  <br><br>
+
+  <div id="two">
+    <button (click)="deleteCustomer()">Eliminar</button>
+    <button (click)="updateCustomer()">Modificar</button>
+    <button routerLink='/customers-list'>Atrás</button>
+  </div>
+
+  
+</div>
