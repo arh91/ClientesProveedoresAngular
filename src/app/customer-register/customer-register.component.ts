@@ -20,7 +20,7 @@ export class CustomerRegisterComponent {
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
 
   registerCustomer(): void {
-    // Verificamos que los campos obligatorios no estén vacíos
+    // Verificamos que no quede ningún campo vacío
     if (!this.customer.dni || !this.customer.name || !this.customer.address || !this.customer.phone) {
       this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
       return; 
