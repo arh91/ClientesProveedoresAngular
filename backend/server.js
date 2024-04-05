@@ -86,6 +86,21 @@ app.get('/api/proveedores/codigos', (_req, res) => {
   });
 });
 
+// Endpoint para obtener un cliente por su dni
+app.get('/api/clientes/codigo/:dni', (req, res) => {
+  const clienteDni = req.params.dni;
+  db.get('SELECT id FROM Clientes WHERE dni = ?', [clienteDni], (err, row) => {
+    if (err) {
+      console.error('Error al obtener datos del cliente:', err);
+      return res.status(500).json({ error: 'Error al obtener datos del cliente' });
+    }
+    if (!row) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+    res.json(row);
+  });
+});
+
 // Endpoint para obtener los datos de un cliente por su id
 app.get('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;

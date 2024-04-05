@@ -27,6 +27,23 @@ export class CustomersListComponent implements OnInit {
 
 
   getCustomerCodes(): void {
+    this.customerIds = [];
+    this.http.get<any>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
+      if (data && data.codigos && Array.isArray(data.codigos)) {
+        this.customerIds = data.codigos;
+      }
+      if (this.customerIds.length === 0) {
+        this.mensajeListaVacia();
+      } else {
+        console.error('Respuesta inválida del servidor:', data);
+      }
+    }, error => {
+      console.error('Error al obtener códigos de clientes:', error);
+    });
+  }
+
+  getCustomerCodeByDni(): void {
+    this.customerIds = [];
     this.http.get<any>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
       if (data && data.codigos && Array.isArray(data.codigos)) {
         this.customerIds = data.codigos;
@@ -59,6 +76,21 @@ export class CustomersListComponent implements OnInit {
       console.error('Error al eliminar clientes:', error);
       this.openSnackBar('Error al eliminar clientes', 'Cerrar');
     });
+  }
+
+  showCustomerSearch() {
+    const customerSearch = document.getElementById("findByDni");
+    if (customerSearch) {
+      customerSearch.style.visibility = "visible"; // Mostrar elementos
+    }
+  }
+
+  backToMainList(): void {
+    const customerSearch = document.getElementById("findByDni");
+    if (customerSearch) {
+      customerSearch.style.visibility = "hidden"; // Mostrar elementos
+    }
+    this.getCustomerCodes();
   }
 
   mensajeListaVacia(): void {

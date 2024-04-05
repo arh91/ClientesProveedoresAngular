@@ -32,3 +32,7 @@ input[type="text"] {
     margin-top:80px;
 }
 
+::ng-deep .mat-snack-bar-container {
+    max-width: 400px; /* Ancho máximo del MatSnackBar */
+}
+

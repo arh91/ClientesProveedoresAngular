@@ -1,14 +1,22 @@
 <h1>Listado de Clientes</h1>
-<ul>
-  <li *ngFor="let id of customerIds">
-    <a [routerLink]="['/customer-details', id]">{{ id }}</a>
-  </li>
-</ul>
-<br>
-<div>
-  <button routerLink="/customer-options">Atrás</button>
+<div id = "main">
+  <div class="customersList">
+    <ul>
+      <li *ngFor="let id of customerIds">
+        <a [routerLink]="['/customer-details', id]">{{ id }}</a>
+      </li>
+    </ul>
+  </div>
+  <div id="findByDni">
+    <label for="customerDni" id="labelCustomerDni">Introduzca el dni del cliente que quiere buscar:</label><br>
+    <input type="text" id="customerDni" name="customerDni"><br>
+    <button>OK</button>
+    <button (click)="backToMainList()">Volver</button>
+  </div>
 </div>
 <br>
-<div>
+<div id = "customersListButtons">
+  <button (click)="showCustomerSearch()">Buscar por dni</button>
   <button (click)="deleteAllCustomers()">EliminarTodos</button>
+  <button routerLink="/customer-options">Atrás</button>
 </div>

@@ -40,8 +40,8 @@ export class CustomerRegisterComponent {
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000, // Duración en milisegundos
-      verticalPosition: 'bottom', // Posición vertical
-      horizontalPosition: 'center', // Posición horizontal
+      verticalPosition: 'top', // Posición vertical
+      horizontalPosition: 'right', // Posición horizontal
     });
   }
   

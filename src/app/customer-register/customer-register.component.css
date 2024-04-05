@@ -38,4 +38,8 @@
   h1{
     margin-left:130px;
   }
+
+  ::ng-deep .mat-snack-bar-container {
+    max-width: 400px; /* Ancho máximo del MatSnackBar */
+  }
   

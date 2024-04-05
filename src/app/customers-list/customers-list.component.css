@@ -1,0 +1,40 @@
+#main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.customersList{
+    margin-top: 50px;
+}
+
+#findByDni{
+    visibility: hidden;
+    width: 400px;
+    position: fixed;
+    right: 20px;
+}
+
+#findByDni input{
+    margin-top: 20px;
+}
+
+#findByDni button{
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+#customersListButtons{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 50px;
+}
+
+.customersList ul li{
+    margin-bottom: 20px;
+}
+
+#customersListButtons button{
+    margin-right: 20px;
+}
