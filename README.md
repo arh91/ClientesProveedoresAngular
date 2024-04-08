@@ -9,5 +9,3 @@ En el listado, al hacer click sobre un código, la aplicación redirigirá al us
 y el usuario tendrá la opción de eliminar dicho registro o bien de modificar algún dato si así lo desea.
 
 En el listado de registros, el usuario también tendrá la opción de buscar un cliente o proveedor concreto simplemente introduciendo su dni.
-
-Aplicación aún no terminada.
