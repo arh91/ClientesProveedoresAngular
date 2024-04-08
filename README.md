@@ -1,4 +1,4 @@
-Proyecto construido con Angular 17.3 que trabaja con una base de datos SQLite para almacenar información de clientes y proveedores de una empresa, 
+Proyecto construido con Angular 17.3 que trabaja con una base de datos local SQLite para almacenar información de clientes y proveedores de una empresa, 
 y un servidor para manejar operaciones CRUD con dicha base de datos.
 
 La aplicación consta de un área para clientes y otra para proveedores.
