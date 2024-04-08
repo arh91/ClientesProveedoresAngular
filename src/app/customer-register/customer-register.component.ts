@@ -53,7 +53,7 @@ export class CustomerRegisterComponent {
       console.log('Cliente registrado en el servidor');
       // Limpiar el formulario después del registro exitoso
       this.customer = { dni: '', name: '', address: '', phone: '' };
-      this.openSnackBar('Aviso', 'Cliente registrado');
+      alert("Cliente registrado");
     }, error => {
       console.error('Error al registrar el cliente:', error);
       this.openSnackBar('Aviso', 'No se ha podido registrar el cliente');

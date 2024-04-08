@@ -5,7 +5,9 @@ const { v4: uuidv4 } = require('uuid'); // Importar la función uuidv4 para gene
 
 const app = express();
 const port = 3000;
+//const cors = require('cors');
 
+//app.use(cors());
 
 // Middleware para permitir solicitudes desde el cliente Angular (CORS)
 app.use((req, res, next) => {
