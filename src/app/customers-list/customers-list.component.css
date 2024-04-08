@@ -3,8 +3,12 @@
     justify-content: space-between;
 }
 
-.customersList{
+#customersList{
     margin-top: 50px;
+}
+
+#customerFound{
+    display: none;
 }
 
 #findByDni{

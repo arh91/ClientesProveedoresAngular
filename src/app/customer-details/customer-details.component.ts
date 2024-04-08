@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 interface Customer {
   id: number;
   dni: string;
@@ -11,6 +12,7 @@ interface Customer {
   direccion: string;
   telefono: string;
 }
+
 
 @Component({
   selector: 'app-customer-details',
@@ -31,6 +33,7 @@ export class CustomerDetailsComponent implements OnInit {
     });
   }
 
+
   getCustomerDetails(id: number): void {
     this.http.get<Customer>(`http://localhost:3000/api/clientes/${id}`).subscribe(data => {
       this.customer = data; // Almacenar detalles del cliente
@@ -38,6 +41,7 @@ export class CustomerDetailsComponent implements OnInit {
       console.error('Error al obtener detalles del cliente:', error);
     });
   }
+
 
   deleteCustomer(): void {
     if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
@@ -52,6 +56,7 @@ export class CustomerDetailsComponent implements OnInit {
       this.openSnackBar('Error al eliminar cliente', 'Cerrar');
     });
   }
+
 
   updateCustomer(): void {
     // Verificamos que no quede ningún campo vacío
@@ -71,6 +76,7 @@ export class CustomerDetailsComponent implements OnInit {
     });
   }
 
+  
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000, // Duración en milisegundos

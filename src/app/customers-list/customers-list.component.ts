@@ -5,23 +5,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Customer {
   id: number; 
-  code: string
+  dni: string
   name: string;
   address: string;
   phone: string;
 }
 
+/* interface Customerr {
+  id: number; 
+}
+ */
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
   styleUrl: './customers-list.component.css'
 })
 export class CustomersListComponent implements OnInit {
+  dniInput: string = '';
   customerIds: Customer[] = [];
+  //customerId: number[] = [];
+  customer: Customer | undefined;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.getCustomerCodes();
   }
 
@@ -33,7 +40,7 @@ export class CustomersListComponent implements OnInit {
         this.customerIds = data.codigos;
       }
       if (this.customerIds.length === 0) {
-        this.mensajeListaVacia();
+        this.emptyListMessage();
       } else {
         console.error('Respuesta inválida del servidor:', data);
       }
@@ -42,19 +49,39 @@ export class CustomersListComponent implements OnInit {
     });
   }
 
-  getCustomerCodeByDni(): void {
+  okAction(): void{
+    if(!this.validarDNI(this.dniInput)){
+      alert("Por favor, introduzca un dni válido");
+      return;
+    }
+    const customersList = document.getElementById("customersList");
+    const customerFound = document.getElementById("customerFound");
+    if (customersList && customerFound) {
+      customersList.style.visibility = "none";
+      customerFound.style.visibility = "visible"; // Mostrar elementos
+    }
+    this.getCustomerCodeByDni(this.dniInput);
+  }
+
+  getCustomerCodeByDni(dni: string): void {
+    // Verificamos que no quede ningún campo vacío
+    if (!dni) {
+      this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      return; 
+    }
+    console.log(dni);
     this.customerIds = [];
-    this.http.get<any>('http://localhost:3000/api/clientes/codigos').subscribe(data => {
-      if (data && data.codigos && Array.isArray(data.codigos)) {
-        this.customerIds = data.codigos;
-      }
-      if (this.customerIds.length === 0) {
-        this.mensajeListaVacia();
+    this.http.get<any>(`http://localhost:3000/api/clientes/codigos/${dni}`).subscribe(data => {
+      const customerId = data.id;
+      if (customerId) {
+        this.customerIds.push(customerId);
+        console.log(customerId);
       } else {
-        console.error('Respuesta inválida del servidor:', data);
+        this.customerNotFoundMessage();
       }
     }, error => {
       console.error('Error al obtener códigos de clientes:', error);
+      this.customerNotFoundMessage();
     });
   }
 
@@ -93,8 +120,41 @@ export class CustomersListComponent implements OnInit {
     this.getCustomerCodes();
   }
 
-  mensajeListaVacia(): void {
+  validarDNI(dni: string): boolean {
+    // Patrón para validar DNI: 8 dígitos seguidos de una letra (mayúscula o minúscula)
+    const dniPattern = /^\d{8}[a-zA-Z]$/;
+  
+    // Comprobamos si el DNI coincide con el patrón
+    if (dniPattern.test(dni)) {
+      // Extraer los dígitos y la letra del DNI
+      const numerosDNI = dni.slice(0, -1);
+      const letraDNI = dni.slice(-1).toUpperCase();
+  
+      // Calculamos la letra esperada a partir de los dígitos del DNI
+      const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      const indiceLetra = parseInt(numerosDNI) % 23;
+      const letraEsperada = letras.charAt(indiceLetra);
+  
+      // Comprobamos si la letra del DNI coincide con la letra esperada
+      if (letraDNI === letraEsperada) {
+        return true; // El formato del DNI es válido
+      }
+    }
+    
+    // El formato del DNI no es válido
+    return false;
+  }
+
+  emptyListMessage(): void {
     this._snackBar.open('No hay clientes registrados.', 'Cerrar', {
+      duration: 3000, // Duración en milisegundos
+      verticalPosition: 'top', // Posición vertical
+      horizontalPosition: 'center', // Posición horizontal
+    });
+  }
+
+  customerNotFoundMessage(): void {
+    this._snackBar.open('No se ha encontrado ningún cliente con éste dni.', 'Cerrar', {
       duration: 3000, // Duración en milisegundos
       verticalPosition: 'top', // Posición vertical
       horizontalPosition: 'center', // Posición horizontal

@@ -1,6 +1,13 @@
 <h1>Listado de Clientes</h1>
 <div id = "main">
-  <div class="customersList">
+  <div id="customersList">
+    <ul>
+      <li *ngFor="let id of customerIds">
+        <a [routerLink]="['/customer-details', id]">{{ id }}</a>
+      </li>
+    </ul>
+  </div>
+  <div id="customerFound">
     <ul>
       <li *ngFor="let id of customerIds">
         <a [routerLink]="['/customer-details', id]">{{ id }}</a>
@@ -9,8 +16,8 @@
   </div>
   <div id="findByDni">
     <label for="customerDni" id="labelCustomerDni">Introduzca el dni del cliente que quiere buscar:</label><br>
-    <input type="text" id="customerDni" name="customerDni"><br>
-    <button>OK</button>
+    <input type="text" id="customerDni" name="customerDni" [(ngModel)]="dniInput"><br>
+    <button (click)="okAction()">OK</button>
     <button (click)="backToMainList()">Volver</button>
   </div>
 </div>
