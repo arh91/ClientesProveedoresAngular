@@ -64,6 +64,22 @@ export class CustomerDetailsComponent implements OnInit {
       this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
       return; 
     }
+    //Verificamos que el nombre introducido no tenga más de 50 caracteres
+    if(this.comprobarLongitudCadena(this.customer.nombre)){
+      alert("El nombre introducido no debe contener más de 50 caracteres");
+      return;
+    }
+    //Verificamos que la dirección introducida no tenga más de 50 caracteres
+    if(this.comprobarLongitudCadena(this.customer.direccion)){
+      alert("La dirección introducida no debe contener más de 50 caracteres");
+      return;
+    }
+    //Verificamos que el formato de número de teléfono sea correcto
+    if(!this.validarTelefono(this.customer.telefono)){
+      alert("Por favor, introduzca un número de teléfono válido");
+      return;
+    }
+
     if (!confirm('¿Estás seguro de que deseas modificar este cliente?')) {
       return;
     }
@@ -74,6 +90,28 @@ export class CustomerDetailsComponent implements OnInit {
       console.error('Error al actualizar el cliente:', error);
       this.openSnackBar('Error al actualizar el cliente', 'Cerrar');
     });
+  }
+
+
+  comprobarLongitudCadena(cadena: string): boolean {
+    if (cadena.length > 50) {
+      return true; 
+    } else {
+      return false; 
+    }
+  }
+
+
+  validarTelefono(cadena: string): boolean {
+    // Expresión regular para verificar que la cadena contenga exactamente 9 dígitos
+    const regex = /^\d{9}$/;
+    
+    // Comprobamos si la cadena coincide con la expresión regular
+    if (regex.test(cadena)) {
+      return true; // La cadena contiene 9 números
+    } else {
+      return false; // La cadena no cumple con el formato deseado
+    }
   }
 
   

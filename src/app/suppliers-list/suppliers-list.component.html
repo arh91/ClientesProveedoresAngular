@@ -1,10 +1,29 @@
 <h1>Listado de Proveedores</h1>
-<ul>
-  <li *ngFor="let id of supplierIds">
-    <a [routerLink]="['/supplier-details', id]">{{ id }}</a>
-  </li>
-</ul>
+<div id = "main">
+  <div id="suppliersList">
+    <ul>
+      <li *ngFor="let id of supplierIds">
+        <a [routerLink]="['/supplier-details', id]">{{ id }}</a>
+      </li>
+    </ul>
+  </div>
+  <div id="supplierFound">
+    <ul>
+      <li *ngFor="let id of supplierIds">
+        <a [routerLink]="['/supplier-details', id]">{{ id }}</a>
+      </li>
+    </ul>
+  </div>
+  <div id="findByDni">
+    <label for="supplierDni" id="labelSupplierDni">Introduzca el dni del proveedor que quiere buscar:</label><br>
+    <input type="text" id="supplierDni" name="supplierDni" [(ngModel)]="dniInput"><br>
+    <button (click)="okAction()">OK</button>
+    <button (click)="backToMainList()">Volver</button>
+  </div>
+</div>
 <br>
-    <div>
-      <button routerLink="/supplier-options">Atrás</button>
-    </div>
+<div id = "suppliersListButtons">
+  <button (click)="showSupplierSearch()">Buscar por dni</button>
+  <button (click)="deleteAllSuppliers()">EliminarTodos</button>
+  <button routerLink="/supplier-options">Atrás</button>
+</div>

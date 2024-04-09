@@ -1,0 +1,44 @@
+#main{
+    display: flex;
+    justify-content: space-between;
+}
+
+#suppliersList{
+    margin-top: 50px;
+}
+
+#supplierFound{
+    display: none;
+}
+
+#findByDni{
+    visibility: hidden;
+    width: 400px;
+    position: fixed;
+    right: 20px;
+}
+
+#findByDni input{
+    margin-top: 20px;
+}
+
+#findByDni button{
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+#suppliersListButtons{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 50px;
+}
+
+.suppliersList ul li{
+    margin-bottom: 20px;
+}
+
+#suppliersListButtons button{
+    margin-right: 20px;
+}

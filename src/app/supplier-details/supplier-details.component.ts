@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 interface Supplier {
   id: number;
   dni: string;
@@ -12,6 +13,7 @@ interface Supplier {
   direccion: string;
   telefono: string;
 }
+
 
 @Component({
   selector: 'app-supplier-details',
@@ -32,6 +34,7 @@ export class SupplierDetailsComponent implements OnInit {
     });
   }
 
+
   getSupplierDetails(id: number): void {
     this.http.get<Supplier>(`http://localhost:3000/api/proveedores/${id}`).subscribe(data => {
       this.supplier = data; // Almacenamos detalles del proveedor
@@ -39,6 +42,7 @@ export class SupplierDetailsComponent implements OnInit {
       console.error('Error al obtener detalles del proveedor:', error);
     });
   }
+
 
   deleteSupplier(): void {
     if (!confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
@@ -54,12 +58,29 @@ export class SupplierDetailsComponent implements OnInit {
     });
   }
 
+
   updateSupplier(): void {
     // Verificamos que no quede ningún campo vacío
-    if (!this.supplier?.dni || !this.supplier?.nombre || !this.supplier?.direccion || !this.supplier?.telefono) {
+    if (!this.supplier?.nombre || !this.supplier?.direccion || !this.supplier?.telefono) {
       this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
       return; 
     }
+    //Verificamos que el nombre introducido no tenga más de 50 caracteres
+    if(this.comprobarLongitudCadena(this.supplier.nombre)){
+      alert("El nombre introducido no debe contener más de 50 caracteres");
+      return;
+    }
+    //Verificamos que la dirección introducida no tenga más de 50 caracteres
+    if(this.comprobarLongitudCadena(this.supplier.direccion)){
+      alert("La dirección introducida no debe contener más de 50 caracteres");
+      return;
+    }
+    //Verificamos que el formato de número de teléfono sea correcto
+    if(!this.validarTelefono(this.supplier.telefono)){
+      alert("Por favor, introduzca un número de teléfono válido");
+      return;
+    }
+    
     if (!confirm('¿Estás seguro de que deseas modificar este proveedor?')) {
       return;
     }
@@ -71,6 +92,29 @@ export class SupplierDetailsComponent implements OnInit {
       this.openSnackBar('Error al actualizar el proveedor', 'Cerrar');
     });
   }
+
+
+  comprobarLongitudCadena(cadena: string): boolean {
+    if (cadena.length > 50) {
+      return true; 
+    } else {
+      return false; 
+    }
+  }
+
+
+  validarTelefono(cadena: string): boolean {
+    // Expresión regular para verificar que la cadena contenga exactamente 9 dígitos
+    const regex = /^\d{9}$/;
+    
+    // Comprobamos si la cadena coincide con la expresión regular
+    if (regex.test(cadena)) {
+      return true; // La cadena contiene 9 números
+    } else {
+      return false; // La cadena no cumple con el formato deseado
+    }
+  }
+
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

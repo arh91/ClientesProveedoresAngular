@@ -11,10 +11,7 @@ interface Customer {
   phone: string;
 }
 
-/* interface Customerr {
-  id: number; 
-}
- */
+
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -23,7 +20,6 @@ interface Customer {
 export class CustomersListComponent implements OnInit {
   dniInput: string = '';
   customerIds: Customer[] = [];
-  //customerId: number[] = [];
   customer: Customer | undefined;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar, private router: Router) {}

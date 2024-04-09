@@ -19,7 +19,8 @@ interface Customer {
 export class CustomerRegisterComponent {
   customer: Customer = { dni: '', name: '', address: '', phone: '' };
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
+  }
 
   registerCustomer(): void {
     // Verificamos que no quede ningún campo vacío

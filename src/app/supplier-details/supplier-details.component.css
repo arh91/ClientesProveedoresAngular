@@ -3,31 +3,31 @@
     flex-direction: column; /* Alinea los elementos horizontalmente */
   }
 
-  .customer-id {
+  .supplier-id {
     display: flex;
     justify-content: space-between; 
     margin-bottom:20px;
   }
 
-  .customer-nif {
+  .supplier-nif {
     display: flex;
     justify-content: space-between; 
     margin-bottom:20px;
   }
 
-  .customer-name {
+  .supplier-name {
     display: flex;
     justify-content: space-between; 
     margin-bottom:20px;
   }
 
-  .customer-address {
+  .supplier-address {
     display: flex;
     justify-content: space-between;
     margin-bottom:20px; 
   }
 
-  .customer-phone {
+  .supplier-phone {
     display: flex;
     justify-content: space-between; 
   }
