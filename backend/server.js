@@ -157,6 +157,39 @@ app.get('/api/proveedores/:id', (req, res) => {
 });
 
 
+//Endpoint para verificar si existe en la base de datos el dni de cliente que le pasamos
+app.get('/api/clientes/existe/:dni', (req, res) => {
+  console.log("endpoint checkdniexistence customers");
+  const dni = req.params.dni;
+  db.get('SELECT COUNT(*) AS count FROM Clientes WHERE dni = ?', [dni], (err, row) => {
+    if (err) {
+      console.error('Error al verificar la existencia del DNI:', err);
+      return res.status(500).json({ error: 'Error al verificar la existencia del DNI' });
+    }
+    const exists = row && row.count > 0;
+    res.json({ exists });
+    console.log(row);
+    console.log(exists);
+  });
+});
+
+//Endpoint para verificar si existe en la base de datos el dni de proveedor que le pasamos
+app.get('/api/proveedores/existe/:dni', (req, res) => {
+  console.log("endpoint checkdniexistence suppliers");
+  const dni = req.params.dni;
+  db.get('SELECT COUNT(*) AS count FROM Proveedores WHERE dni = ?', [dni], (err, row) => {
+    if (err) {
+      console.error('Error al verificar la existencia del DNI:', err);
+      return res.status(500).json({ error: 'Error al verificar la existencia del DNI' });
+    }
+    const exists = row && row.count > 0;
+    console.log(row);
+    console.log(exists);
+    res.json({ exists });
+  });
+});
+
+
 //Endpoint para eliminar un cliente por su id
 app.delete('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;
@@ -253,6 +286,18 @@ app.put('/api/proveedores/:id', (req, res) => {
   );
 });
 
+
+app.put('/api/clientes/:deletedid', (req, res) => {
+  db.run('UPDATE Clientes SET id = id - 1 WHERE id > ?', [id], (err) => {
+    if (err) {
+      console.error('Error al actualizar los IDs:', err);
+      res.status(500).json({ error: 'Error al actualizar los IDs' });
+      return;
+    }
+    console.log('IDs actualizados correctamente');
+    res.status(200).json({ message: 'IDs actualizados correctamente' });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Servidor activo en el puerto ${port}`);

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DniService } from '../dni.service';
+import { ExistsInCustomers } from '../dni.service';
+import { ExistsInSuppliers } from '../dni.service';
 
 interface Supplier {
   dni: string;
@@ -16,8 +19,9 @@ interface Supplier {
 })
 export class SupplierRegisterComponent {
   supplier: Supplier = { dni: '', name: '', address: '', phone: '' };
+  //dniExists: boolean = false;
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar, private dniService: DniService) {}
 
   registerSupplier(): void {
     // Verificamos que los campos obligatorios no estén vacíos
@@ -45,16 +49,14 @@ export class SupplierRegisterComponent {
       alert("Por favor, introduzca un número de teléfono válido");
       return;
     }
-
-    // Realizamos una solicitud POST al endpoint del backend para registrar el cliente
-    this.http.post('http://localhost:3000/api/proveedores', this.supplier).subscribe(() => {
-      console.log('Proveedor registrado en el servidor');
-      // Limpiar el formulario después del registro exitoso
-      this.supplier = { dni: '', name: '', address: '', phone: '' };
-      alert("Cliente registrado");
-    }, error => {
-      console.error('Error al registrar el proveedor:', error);
-    });
+    //Verificamos si el dni introducido ya existe en la base de datos y en caso contrario registramos el proveedor
+    this.comprobarDniYRegistrar(this.supplier.dni);
+    /*console.log("dniExists vale "+this.dniExists);
+    if (this.dniExists){
+      this.dniExists = false;
+      alert('El dni introducido ya existe en la base de datos.');
+      return;
+    }*/
   }
 
 
@@ -80,6 +82,43 @@ export class SupplierRegisterComponent {
     }
     // El formato del DNI no es válido
     return false;
+  }
+
+
+  comprobarDniYRegistrar(dni: string): void {
+    console.log("Método checkdniexistence()");
+    this.dniService.checkDniInCustomers(dni).subscribe((cli: ExistsInCustomers) => {
+      console.log(cli);
+      if (cli.exists) {
+        alert('El dni introducido ya existe en la base de datos.');
+        console.log("El DNI existe en clientes");
+        return;
+      } else {
+        console.log("El DNI no existe en clientes. Buscando en proveedores...");
+          this.dniService.checkDniInSuppliers(dni).subscribe((prov: ExistsInSuppliers) => {
+          console.log(prov);
+          if (prov.exists) {
+            alert('El dni introducido ya existe en la base de datos.');
+            console.log("El DNI existe en proveedores");
+            return;
+          } else {
+            console.log("El DNI no existe en proveedores");
+            // Realizamos una solicitud POST al endpoint del backend para registrar el proveedor
+            this.http.post('http://localhost:3000/api/proveedores', this.supplier).subscribe(() => {
+              console.log('Proveedor registrado en el servidor');
+              // Limpiar el formulario después del registro exitoso
+              this.supplier = { dni: '', name: '', address: '', phone: '' };
+              alert("Proveedor registrado");
+            }, error => {
+              console.error('Error al registrar el proveedor:', error);
+              this.openSnackBar('Aviso', 'No se ha podido registrar el proveedor');
+            });
+          }
+        });
+      }
+    }, (error: any) => {
+      console.error('Error al verificar la existencia del DNI:', error);
+    });
   }
 
 
