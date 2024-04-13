@@ -193,6 +193,9 @@ app.get('/api/proveedores/existe/:dni', (req, res) => {
 //Endpoint para eliminar un cliente por su id
 app.delete('/api/clientes/:id', (req, res) => {
   const clienteId = req.params.id;
+  //Abrimos conexión con la base de datos
+  //const db = new sqlite3.Database('empresa.db');
+  //Eliminamos registro con el id dado
   db.run('DELETE FROM Clientes WHERE id = ?', [clienteId], (err) => {
     if (err) {
       console.error('Error al eliminar el cliente de la base de datos:', err);
@@ -200,6 +203,18 @@ app.delete('/api/clientes/:id', (req, res) => {
     }
     res.status(200).json({ message: 'Cliente eliminado correctamente' });
   });
+  // Actualizamos los IDs restantes
+  /*db.run('UPDATE Clientes SET id = id - 1 WHERE id > ?', [clienteId], (err) => {
+    if (err) {
+      console.error('Error al actualizar los IDs:', err);
+      res.status(500).json({ error: 'Error al actualizar los IDs' });
+      return;
+    }
+    console.log('IDs actualizados correctamente');
+    res.status(200).json({ message: 'IDs actualizados correctamente' });
+  });
+  // Cerramos conexión con la base de datos
+  db.close();*/
 });
 
 //Endpoint para eliminar un proveedor por su id

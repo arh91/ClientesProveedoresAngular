@@ -74,11 +74,13 @@ export class SuppliersListComponent implements OnInit{
         this.supplierIds.push(supplierId);
         console.log(supplierId);
       } else {
-        this.supplierNotFoundMessage();
+        //this.supplierNotFoundMessage();
+        alert("No se ha encontrado ningún proveedor con éste dni.");
       }
     }, error => {
       console.error('Error al obtener códigos de proveedores:', error);
-      this.supplierNotFoundMessage();
+      //this.supplierNotFoundMessage();
+      alert("No se ha encontrado ningún proveedor con éste dni.");
     });
   }
 
@@ -119,7 +121,7 @@ export class SuppliersListComponent implements OnInit{
 
   validarDNI(dni: string): boolean {
     // Patrón para validar DNI: 8 dígitos seguidos de una letra (mayúscula o minúscula)
-    const dniPattern = /^\d{8}[a-zA-Z]$/;
+    const dniPattern = /^\d{8}[A-Z]$/;
   
     // Comprobamos si el DNI coincide con el patrón
     if (dniPattern.test(dni)) {

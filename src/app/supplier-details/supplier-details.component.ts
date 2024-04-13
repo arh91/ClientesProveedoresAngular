@@ -23,6 +23,9 @@ interface Supplier {
 export class SupplierDetailsComponent implements OnInit {
   supplierId: number = 0;
   supplier: Supplier | undefined;
+  oldSupplierName = "";
+  oldSupplierAddress = "";
+  oldSupplierPhone = "";
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private _snackBar: MatSnackBar, private router: Router) { }
 
@@ -38,6 +41,9 @@ export class SupplierDetailsComponent implements OnInit {
   getSupplierDetails(id: number): void {
     this.http.get<Supplier>(`http://localhost:3000/api/proveedores/${id}`).subscribe(data => {
       this.supplier = data; // Almacenamos detalles del proveedor
+      this.oldSupplierName = this.supplier.nombre;
+      this.oldSupplierAddress = this.supplier.direccion;
+      this.oldSupplierPhone = this.supplier.telefono;
     }, error => {
       console.error('Error al obtener detalles del proveedor:', error);
     });
@@ -60,10 +66,20 @@ export class SupplierDetailsComponent implements OnInit {
 
 
   updateSupplier(): void {
+    let newSupplierName = this.supplier?.nombre;
+    let newSupplierAddress = this.supplier?.direccion;
+    let newSupplierPhone = this.supplier?.telefono;
+
     // Verificamos que no quede ningún campo vacío
     if (!this.supplier?.nombre || !this.supplier?.direccion || !this.supplier?.telefono) {
-      this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      //this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      alert("Por favor, rellene todos los campos");
       return; 
+    }
+    if(this.oldSupplierName==newSupplierName && this.oldSupplierAddress==newSupplierAddress && this.oldSupplierPhone==newSupplierPhone){
+      //this.openSnackBar('Aviso', 'No se ha modificado ningún dato.');
+      alert("No se ha modificado ningún dato");
+      return;
     }
     //Verificamos que el nombre introducido no tenga más de 50 caracteres
     if(this.comprobarLongitudCadena(this.supplier.nombre)){

@@ -62,7 +62,7 @@ export class SupplierRegisterComponent {
 
   validarDNI(dni: string): boolean {
     // Patrón para validar DNI: 8 dígitos seguidos de una letra (mayúscula o minúscula)
-    const dniPattern = /^\d{8}[a-zA-Z]$/;
+    const dniPattern = /^\d{8}[A-Z]$/;
   
     // Comprobar si el DNI coincide con el patrón
     if (dniPattern.test(dni)) {

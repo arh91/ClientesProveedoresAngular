@@ -73,11 +73,13 @@ export class CustomersListComponent implements OnInit {
         this.customerIds.push(customerId);
         console.log(customerId);
       } else {
-        this.customerNotFoundMessage();
+        alert("No se ha encontrado ningún cliente con éste dni.");
+        //this.customerNotFoundMessage();
       }
     }, error => {
       console.error('Error al obtener códigos de clientes:', error);
-      this.customerNotFoundMessage();
+      //this.customerNotFoundMessage();
+      alert("No se ha encontrado ningún cliente con éste dni.");
     });
   }
 
@@ -101,6 +103,7 @@ export class CustomersListComponent implements OnInit {
     });
   }
 
+
   showCustomerSearch() {
     const customerSearch = document.getElementById("findByDni");
     if (customerSearch) {
@@ -118,7 +121,7 @@ export class CustomersListComponent implements OnInit {
 
   validarDNI(dni: string): boolean {
     // Patrón para validar DNI: 8 dígitos seguidos de una letra (mayúscula o minúscula)
-    const dniPattern = /^\d{8}[a-zA-Z]$/;
+    const dniPattern = /^\d{8}[A-Z]$/;
   
     // Comprobamos si el DNI coincide con el patrón
     if (dniPattern.test(dni)) {

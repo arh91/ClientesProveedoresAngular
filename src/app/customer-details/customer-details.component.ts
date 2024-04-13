@@ -22,6 +22,10 @@ interface Customer {
 export class CustomerDetailsComponent implements OnInit {
   customerId: number = 0;
   customer: Customer | undefined;
+  oldCustomerName = "";
+  oldCustomerAddress = "";
+  oldCustomerPhone = "";
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private _snackBar: MatSnackBar, private router: Router) { }
 
@@ -37,9 +41,13 @@ export class CustomerDetailsComponent implements OnInit {
   getCustomerDetails(id: number): void {
     this.http.get<Customer>(`http://localhost:3000/api/clientes/${id}`).subscribe(data => {
       this.customer = data; // Almacenar detalles del cliente
+      this.oldCustomerName = this.customer.nombre;
+      this.oldCustomerAddress = this.customer.direccion;
+      this.oldCustomerPhone = this.customer.telefono;
     }, error => {
       console.error('Error al obtener detalles del cliente:', error);
     });
+    
   }
 
 
@@ -47,7 +55,8 @@ export class CustomerDetailsComponent implements OnInit {
     if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
       return;
     }
-    this.http.delete(`http://localhost:3000/api/clientes/${this.customer?.id}`).subscribe(() => {
+    const dniAEliminar = this.customer?.id;
+    this.http.delete(`http://localhost:3000/api/clientes/${dniAEliminar}`).subscribe(() => {
       console.log('Cliente eliminado');
       this.openSnackBar('Cliente eliminado correctamente', 'Cerrar');
       this.router.navigate(['/customers-list']); // Redirigir a la lista de clientes después de eliminar
@@ -59,10 +68,21 @@ export class CustomerDetailsComponent implements OnInit {
 
 
   updateCustomer(): void {
+    let newCustomerName = this.customer?.nombre;
+    let newCustomerAddress = this.customer?.direccion;
+    let newCustomerPhone = this.customer?.telefono;
+
     // Verificamos que no quede ningún campo vacío
     if (!this.customer?.dni || !this.customer?.nombre || !this.customer?.direccion || !this.customer?.telefono) {
-      this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      //this.openSnackBar('Aviso', 'Por favor, rellene todos los campos.');
+      alert("Por favor, rellene todos los campos");
       return; 
+    }
+    // Verificamos que haya modificaciones en los input
+    if(this.oldCustomerName==newCustomerName && this.oldCustomerAddress==newCustomerAddress && this.oldCustomerPhone==newCustomerPhone){
+      //this.openSnackBar('Aviso', 'No se ha modificado ningún dato.');
+      alert("No se ha modificado ningún dato");
+      return;
     }
     //Verificamos que el nombre introducido no tenga más de 50 caracteres
     if(this.comprobarLongitudCadena(this.customer.nombre)){
