@@ -54,13 +54,25 @@ export class SupplierDetailsComponent implements OnInit {
     if (!confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
       return;
     }
+    const idAEliminar = this.supplier?.id ?? 0;
     this.http.delete(`http://localhost:3000/api/proveedores/${this.supplier?.id}`).subscribe(() => {
       console.log('Proveedor eliminado');
       this.openSnackBar('Proveedor eliminado correctamente', 'Cerrar');
-      this.router.navigate(['/suppliers-list']); // Redirigimos a la lista de proveedores después de eliminar
+      this.updateSupplierIds(idAEliminar);
     }, error => {
       console.error('Error al eliminar proveedor:', error);
       this.openSnackBar('Error al eliminar proveedor', 'Cerrar');
+    });
+  }
+
+
+  updateSupplierIds(id: number): void{
+    console.log("método updateSupplierIds recibe id " + id);
+    this.http.put(`http://localhost:3000/api/proveedores/updateids/${id}`, this.supplier).subscribe(() => {
+      console.log('Se han actualizado los IDs en la tabla Proveedores');
+      this.router.navigate(['/suppliers-list']); // Redirigir a la lista de proveedores después de actualizar
+    }, error => {
+      console.error('Error al actualizar IDs:', error);
     });
   }
 

@@ -302,8 +302,10 @@ app.put('/api/proveedores/:id', (req, res) => {
 });
 
 
-app.put('/api/clientes/:deletedid', (req, res) => {
-  db.run('UPDATE Clientes SET id = id - 1 WHERE id > ?', [id], (err) => {
+//Actualiza ids de clientes tras operaciones de borrado
+app.put('/api/clientes/updateids/:deletedid', (req, res) => {
+  const deletedId = req.params.deletedid;
+  db.run('UPDATE Clientes SET id = id - 1 WHERE id > ?', [deletedId], (err) => {
     if (err) {
       console.error('Error al actualizar los IDs:', err);
       res.status(500).json({ error: 'Error al actualizar los IDs' });
@@ -313,6 +315,21 @@ app.put('/api/clientes/:deletedid', (req, res) => {
     res.status(200).json({ message: 'IDs actualizados correctamente' });
   });
 });
+
+//Actualiza ids de proveedores tras operaciones de borrado
+app.put('/api/proveedores/updateids/:deletedid', (req, res) => {
+  const deletedId = req.params.deletedid;
+  db.run('UPDATE Proveedores SET id = id - 1 WHERE id > ?', [deletedId], (err) => {
+    if (err) {
+      console.error('Error al actualizar los IDs:', err);
+      res.status(500).json({ error: 'Error al actualizar los IDs' });
+      return;
+    }
+    console.log('IDs actualizados correctamente');
+    res.status(200).json({ message: 'IDs actualizados correctamente' });
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Servidor activo en el puerto ${port}`);

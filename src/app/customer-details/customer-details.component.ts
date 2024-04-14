@@ -55,14 +55,25 @@ export class CustomerDetailsComponent implements OnInit {
     if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
       return;
     }
-    const dniAEliminar = this.customer?.id;
-    this.http.delete(`http://localhost:3000/api/clientes/${dniAEliminar}`).subscribe(() => {
+    const idAEliminar = this.customer?.id ?? 0;
+    this.http.delete(`http://localhost:3000/api/clientes/${idAEliminar}`).subscribe(() => {
       console.log('Cliente eliminado');
       this.openSnackBar('Cliente eliminado correctamente', 'Cerrar');
-      this.router.navigate(['/customers-list']); // Redirigir a la lista de clientes después de eliminar
+      this.updateCustomerIds(idAEliminar);
+      //this.router.navigate(['/customers-list']); // Redirigir a la lista de clientes después de eliminar
     }, error => {
       console.error('Error al eliminar cliente:', error);
       this.openSnackBar('Error al eliminar cliente', 'Cerrar');
+    });
+  }
+
+  updateCustomerIds(id: number): void{
+    console.log("método updateCustomerIds recibe id " + id);
+    this.http.put(`http://localhost:3000/api/clientes/updateids/${id}`, this.customer).subscribe(() => {
+      console.log('Se han actualizado los IDs en la tabla Clientes');
+      this.router.navigate(['/customers-list']); // Redirigir a la lista de clientes después de actualizar
+    }, error => {
+      console.error('Error al actualizar IDs:', error);
     });
   }
 
