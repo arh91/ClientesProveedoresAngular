@@ -7,7 +7,7 @@
 
 ## Description
 Project built with Angular 17.3 that works with a local SQLite database to store customer and supplier information for a company, 
-and a server to handle CRUD operations with said database.
+and a server to handle CRUD operations with that database.
 
 
 ## Technologies used
