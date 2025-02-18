@@ -1,11 +1,25 @@
-Proyecto construido con Angular 17.3 que trabaja con una base de datos local SQLite para almacenar información de clientes y proveedores de una empresa, 
-y un servidor para manejar operaciones CRUD con dicha base de datos.
+<h1 align="center">Welcome to ClientesProveedoresAngular 👋</h1>
+<p>
+  <a href="https://opensource.org/licenses/MIT" target="_blank">
+    <img alt="License: MIT " src="https://img.shields.io/badge/License-MIT -yellow.svg" />
+  </a>
+</p>
 
-La aplicación consta de un área para clientes y otra para proveedores.
+## Description
+Project built with Angular 17.3 that works with a local SQLite database to store customer and supplier information for a company, 
+and a server to handle CRUD operations with said database.
 
-Cada área se divide en 2 secciones (una para el registro del cliente/proveedor y otra para obtener el listado con todos los códigos de todos los registros guardados).
 
-En el listado, al hacer click sobre un código, la aplicación redirigirá al usuario a una nueva vista en donde se mostrarán todos los datos de ese registro,
-y el usuario tendrá la opción de eliminar dicho registro o bien de modificar algún dato si así lo desea.
+## Technologies used
+- Angular Cli 17.3
+- SQlite Database
 
-En el listado de registros, el usuario también tendrá la opción de buscar un cliente o proveedor concreto simplemente introduciendo su dni.
+
+## Clone the Repository
+
+```sh
+git clone https://github.com/arh91/ClientesProveedoresAngular.git
+```
+
+
+
