@@ -22,4 +22,26 @@ git clone https://github.com/arh91/ClientesProveedoresAngular.git
 ```
 
 
+## Author
+
+👤 **arh91**
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />
+Feel free to check [issues page](https://github.com/arh91/Gestion-Usuarios-Backend/issues). 
+
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+
+## 📝 License
+
+This project is [MIT ](https://opensource.org/licenses/MIT) licensed.
+
+
+
 
