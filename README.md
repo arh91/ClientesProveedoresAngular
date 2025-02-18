@@ -60,7 +60,6 @@ To start the Angular application, run:
 npm start
 ```
 
-
 ### 5. Access the Application
 Once both the backend and frontend are running, open your browser and navigate to http://localhost:4200 to start managing clients and suppliers.
 
@@ -75,8 +74,9 @@ You can perform the following operations on the client and supplier data:
 
 
 ## Technologies used
-- Angular Cli 17.3
-- SQlite Database
+- Frontend: Angular (for the user interface)
+- Backend: Node.js with Express
+- Database: SQLite (local database for storing client and supplier data)
 
 
 
