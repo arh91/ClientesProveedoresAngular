@@ -9,20 +9,77 @@
 Project built with Angular 17.3 that works with a local SQLite database to store customer and supplier information for a company, 
 and a server to handle CRUD operations with that database.
 
+## Features
+- Customer Management: Add, update, view, and delete customer data.
+- Supplier Management:** Add, update, view, and delete supplier information.
+- CRUD Operations: All data is stored and managed in a local SQLite database.
+- User Interface: Built using Angular for a dynamic and responsive web application.
+- Backend: A Node.js server handling database operations and API requests.
+
+
+## Prerequisites
+To run this project, you will need to have the following installed:
+
+- Node.js (version 14 or later)
+- npm (Node Package Manager)
+- SQLite (for the local database)
+
+
+## Setup
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/arh91/ClientesProveedoresAngular.git
+```
+
+### 2. Install dependencies for both frontend and backend
+
+- Install dependencies for the Angular frontend:
+
+```sh
+cd frontend
+npm install
+```
+
+- Install dependencies for the Node.js backend:
+  
+ ```sh
+ cd ../backend
+ npm install
+ ```
+
+### 3. Configure SQLite Database
+Make sure your SQLite database is correctly set up in the backend directory. 
+You may need to create a database file (if not provided) and set up tables for customers and suppliers.
+
+### 4. Run the application
+
+To start the Angular application, run:
+```sh
+npm start
+```
+
+
+### 5. Access the Application
+Once both the backend and frontend are running, open your browser and navigate to http://localhost:4200 to start managing clients and suppliers.
+
+
+## Usage
+You can perform the following operations on the client and supplier data:
+
+- Create: Add new client or supplier records.
+- Read: View the list of existing clients and suppliers.
+- Update: Edit details of clients or suppliers.
+- Delete: Remove client or supplier records.
+
 
 ## Technologies used
 - Angular Cli 17.3
 - SQlite Database
 
 
-## Clone the Repository
 
-```sh
-git clone https://github.com/arh91/ClientesProveedoresAngular.git
-```
-
-
-## Author
 
 👤 **arh91**
 
