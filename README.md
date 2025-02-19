@@ -100,7 +100,7 @@ You can perform the following operations on the client and supplier data:
 - Database: SQLite (local database for storing client and supplier data)
 
 
-
+## Author
 
 👤 **arh91**
 
