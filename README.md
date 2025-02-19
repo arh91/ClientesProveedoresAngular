@@ -22,6 +22,7 @@ To run this project, you will need to have the following installed:
 
 - Node.js (version 14 or later)
 - npm (Node Package Manager)
+- Angular CLI (for development purposes)
 - SQLite (for the local database)
 
 
