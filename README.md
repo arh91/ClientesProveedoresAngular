@@ -36,19 +36,11 @@ git clone https://github.com/arh91/ClientesProveedoresAngular.git
 
 ### 2. Install dependencies for both frontend and backend
 
-- Install dependencies for the Angular frontend:
+Install dependencies for Angular and Node.js in the root directory of the project:
 
 ```sh
-cd frontend
 npm install
 ```
-
-- Install dependencies for the Node.js backend:
-  
- ```sh
- cd ../backend
- npm install
- ```
 
 ### 3. Configure SQLite Database
 Make sure your SQLite database is correctly set up in the backend directory. 
@@ -56,7 +48,7 @@ You may need to create a database file (if not provided) and set up tables for c
 
 ### 4. Run the application
 
-To start the Angular application, run:
+To start the Angular application, go to root directory and run:
 ```sh
 npm start
 ```
